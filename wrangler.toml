@@ -1,0 +1,8 @@
+name = "jpostcode"
+main = "src/main.ts"
+compatibility_date = "2023-05-25"
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "jpostcode"
+database_id = "4e1c28a9-90e4-41da-8b4b-6cf36e5abb29"

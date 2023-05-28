@@ -1,0 +1,32 @@
+{
+  "name": "jpostcode-worker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "NO_D1_WARNING=true wrangler dev",
+    "gen:migrate": "drizzle-kit generate:sqlite --out migrations --schema src/schema.ts",
+    "gen:data-sql": "ts-node scripts/main.js",
+    "migration:local": "wrangler d1 migrations apply jpostcode --local",
+    "migration": "wrangler d1 migrations apply jpostcode",
+    "clone-data": "git clone https://github.com/kufu/jpostcode-data.git data/jpostcode-data 2> /dev/null || (cd data/jpostcode-data; git pull)",
+    "load-data:local": "wrangler d1 execute jpostcode --file ./data/data.sql --local",
+    "load-data": "wrangler d1 execute jpostcode --file ./data/data.sql",
+    "update-data": "pnpm clone-data && pnpm gen:data-sql",
+    "deploy": "wrangler publish",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230419.0",
+    "@types/better-sqlite3": "^7.6.4",
+    "@types/node": "^20.2.5",
+    "better-sqlite3": "^8.4.0",
+    "drizzle-kit": "^0.18.1",
+    "drizzle-orm": "^0.26.1",
+    "hono": "^3.2.2",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "wrangler": "^3.0.0"
+  },
+  "packageManager": "pnpm@8.5.1"
+}
